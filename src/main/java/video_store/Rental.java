@@ -7,7 +7,7 @@ public class Rental {
     }
 
 
-    public Movie getMovie() {
+    Movie getMovie() {
         return movie;
     }
 

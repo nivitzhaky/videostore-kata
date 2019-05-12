@@ -23,16 +23,15 @@ public class Customer {
     }
 
     private String rentalLines() {
-        String lines = "";
+        StringBuilder lines = new StringBuilder();
         for  ( Rental rental  : rentals ) {
-            lines += rentalLine(rental);
+            lines.append(rentalLine(rental));
 
         }
-        return lines;
+        return lines.toString();
     }
 
     private String rentalLine(Rental rental) {
-        String result = "";
         double rentalAmount = rental.determineAmount();
         totalAmount += rentalAmount;
         frequentRenterPoints += rental.determineFrequentPoints();
@@ -41,7 +40,7 @@ public class Customer {
 
     private String formatRentalLine(Rental rental, double rentalAmount) {
         return "\t" + rental.getMovie().getTitle() + "\t"
-            + String.valueOf(rentalAmount) + "\n";
+            + rentalAmount + "\n";
     }
 
     private String header() {
@@ -50,8 +49,8 @@ public class Customer {
 
     private String footer() {
         String result = "";
-        result += "You owed " + String.valueOf(totalAmount) + "\n";
-        result += "You earned " + String.valueOf(frequentRenterPoints) + " frequent renter points\n";
+        result += "You owed " + totalAmount + "\n";
+        result += "You earned " + frequentRenterPoints + " frequent renter points\n";
         return result;
     }
 
@@ -62,7 +61,7 @@ public class Customer {
         return frequentRenterPoints;
     }
 
-    public String getName() {
+    private String getName() {
         return name;
     }
 

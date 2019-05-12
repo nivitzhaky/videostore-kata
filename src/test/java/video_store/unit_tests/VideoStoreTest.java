@@ -2,20 +2,18 @@ package video_store.unit_tests;
 
 import org.junit.Before;
 import org.junit.Test;
-import video_store.Customer;
-import video_store.Movie;
-import video_store.Rental;
+import video_store.*;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 
 public class VideoStoreTest {
-    private final Movie newReleaseMovie = new Movie("New Release", Movie.NEW_RELEASE);
-    private final Movie newReleaseMovie2 = new Movie("New Release2", Movie.NEW_RELEASE);
-    private final Movie childrensMovie = new Movie("Childrens", Movie.CHILDRENS);
-    private final Movie regularMovie = new Movie("Regular", Movie.REGULAR);
-    private final Movie regularMovie2 = new Movie("Regular2", Movie.REGULAR);
-    private final Movie regularMovie3 = new Movie("Regular3", Movie.REGULAR);
+    private final Movie newReleaseMovie = new NewReleaseMovie("New Release");
+    private final Movie newReleaseMovie2 = new NewReleaseMovie("New Release2");
+    private final Movie childrensMovie = new ChildrensMovie("Childrens");
+    private final Movie regularMovie = new RegularMovie("Regular");
+    private final Movie regularMovie2 = new RegularMovie("Regular2");
+    private final Movie regularMovie3 = new RegularMovie("Regular3");
 
     private Customer customer;
 
@@ -30,6 +28,14 @@ public class VideoStoreTest {
         customer.statement();
         assertThat(customer.getTotalAmount(),is(9.0));
         assertThat(customer.getFrequentRenterPoints(),is(2));
+    }
+
+    @Test
+    public void testSingleNewReleaseOneDayStatement() {
+        customer.addRental(new Rental(newReleaseMovie, 1));
+        customer.statement();
+        assertThat(customer.getTotalAmount(),is(3.0));
+        assertThat(customer.getFrequentRenterPoints(),is(1));
     }
 
     @Test
