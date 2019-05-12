@@ -1,5 +1,6 @@
 package video_store;
 
+import java.util.ArrayList;
 import java.util.Vector;
 import java.util.Enumeration;
 
@@ -9,32 +10,33 @@ public class Customer {
         this.name = name;
     }
 
+    private ArrayList<Rental> rentals = new ArrayList<>();
     public void addRental(Rental rental) {
-        rentals.addElement(rental);
+        rentals.add(rental);
     }
 
     public String statement() {
-        Enumeration rentals = this.rentals.elements();
         String result = "Rental Record for " + getName() + "\n";
 
-        while (rentals.hasMoreElements()) {
+        for  ( Rental  each  : rentals ) {
             double thisAmount = 0;
-            Rental each = (Rental) rentals.nextElement();
 
             // determines the amount for each line
             switch (each.getMovie().getPriceCode()) {
                 case Movie.REGULAR:
                     thisAmount += 2;
-                    if (each.getDaysRented() > 2)
+                    if (each.getDaysRented() > 2) {
                         thisAmount += (each.getDaysRented() - 2) * 1.5;
+                    }
                     break;
                 case Movie.NEW_RELEASE:
                     thisAmount += each.getDaysRented() * 3;
                     break;
                 case Movie.CHILDRENS:
                     thisAmount += 1.5;
-                    if (each.getDaysRented() > 3)
+                    if (each.getDaysRented() > 3) {
                         thisAmount += (each.getDaysRented() - 3) * 1.5;
+                    }
                     break;
             }
 
@@ -60,7 +62,6 @@ public class Customer {
 
     private String name;
 
-    private Vector rentals = new Vector();
     private double totalAmount = 0;
     private int frequentRenterPoints = 0;
     public double getTotalAmount() {

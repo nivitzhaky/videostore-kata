@@ -21,7 +21,7 @@ public class VideoStoreTest {
 
     @Before
     public void setUp() {
-        customer = new Customer("Fred");
+        customer = new Customer("customer");
     }
 
     @Test
@@ -74,7 +74,7 @@ public class VideoStoreTest {
 
         assertThat(
                 customer.statement(),
-                is("Rental Record for Fred\n" +
+                is("Rental Record for customer\n" +
                         "\tRegular\t2.0\n" +
                         "\tRegular2\t2.0\n" +
                         "\tRegular3\t3.5\n" +
