@@ -16,4 +16,12 @@ public class Rental {
 
     private Movie movie;
     private int daysRented;
+
+    double determineAmount() {
+       return  movie.determineAmount(daysRented);
+    }
+
+    int determineFrequentPoints() {
+        return movie.determineFrequentPoints(daysRented);
+    }
 }
